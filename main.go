@@ -29,7 +29,7 @@ func main() {
 		Index:         *config.DefaultDocument,
 		CacheDuration: time.Duration(*config.CacheDuration) * time.Second,
 		Next: func(c *fiber.Ctx) bool {
-			return c.Method() != "GET" || len(c.Context().URI().QueryString()) > 0
+			return c.Method() != "GET" || len(c.Context().URI().QueryString()) > 0 || len(c.Get("X-Client")) > 0
 		},
 	})
 
