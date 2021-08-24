@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -22,6 +23,13 @@ func main() {
 
 	app.Use(logger.New())
 	app.Use(*config.ServePrefix, middlewares.ExtraHeaders(config))
+
+	app.Get("/", func(c *fiber.Ctx) error {
+		if strings.HasPrefix(c.Get("User-Agent"), "Mozilla/5.0") {
+			return c.Redirect("/.client")
+		}
+		return c.Next()
+	})
 
 	app.Static(*config.ServePrefix, *config.StoragePath, fiber.Static{
 		Compress:      true,
