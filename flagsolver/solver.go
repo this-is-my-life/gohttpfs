@@ -27,11 +27,11 @@ func SolveFlag() (flags Flags) {
 		flags.ConfigFilePath = &default_config_path
 	}
 
-	if !isFlagPassed("storage-path") {
+	if !isFlagPassed("storage") {
 		flags.StoragePath = nil
 	}
 
-	if !isFlagPassed("serve-prefix") {
+	if !isFlagPassed("prefix") {
 		flags.ServePrefix = nil
 	}
 
@@ -39,11 +39,11 @@ func SolveFlag() (flags Flags) {
 		flags.Listen = nil
 	}
 
-	if !isFlagPassed("default-document") {
+	if !isFlagPassed("default") {
 		flags.DefaultDocument = nil
 	}
 
-	if !isFlagPassed("cache-duration") {
+	if !isFlagPassed("cache") {
 		flags.CacheDuration = nil
 	}
 
