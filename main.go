@@ -25,7 +25,7 @@ func main() {
 	app.Use(*config.ServePrefix, middlewares.ExtraHeaders(config))
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		if strings.HasPrefix(c.Get("User-Agent"), "Mozilla/5.0") {
+		if strings.HasPrefix(c.Get("User-Agent"), "Mozilla/5.0") && len(c.Get("X-Client")) < 1 {
 			return c.Redirect("/.client")
 		}
 		return c.Next()
